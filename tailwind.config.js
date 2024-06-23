@@ -7,6 +7,10 @@ export default {
   /* the lines between these comments */
   ],
   theme: {
+    fontFamily : {
+      sans : ["Sora","sans-serif"],
+      mono : ["Martian Mono", 'monospace']
+    },
     extend: {
       fontFamily : {
         

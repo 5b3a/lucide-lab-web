@@ -35,7 +35,7 @@ function Header() {
             <Text
               size={"8"}
               weight={"bold"}
-              className="font-mono uppercase pt-2"
+              className="font-mono uppercase"
             >
               lucide-labs
             </Text>

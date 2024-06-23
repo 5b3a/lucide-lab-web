@@ -34,7 +34,7 @@ const Footer = () => {
             className="hover:text-[var(--red-10)] def-tr-clr"
           >
             <FlaskConical size={size} className=" -rotate-12" strokeWidth={2} />
-            <Text size={"6"} className="font-mono uppercase pt-1">
+            <Text size={"6"} className="font-mono uppercase ">
               lucide-labs
             </Text>
           </Flex>
