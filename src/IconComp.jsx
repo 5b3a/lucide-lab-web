@@ -285,7 +285,7 @@ function App() {
         <Box
           lang="jsx"
           pt="3"
-          className=" rounded-lg p-4 text-white mt-4 font-mono w-full  flex items-center min-h-12 border border-[var(--red-a4)] bg-[var(--red-a2)]"
+          className=" rounded-lg p-4 text-white mt-4 font-mono w-full  flex items-center min-h-12 border border-[var(--red-a4)] bg-[var(--red-a2)] overflow-x-scroll"
         >
           {tableContent.map((data, index) => {
             return (

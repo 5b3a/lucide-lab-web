@@ -8,10 +8,15 @@ import {
   Grid,
 } from "@radix-ui/themes";
 import { Twitter, Github, FlaskConical, AlertTriangle } from "lucide-react";
-
+import { useEffect } from "react";
+import {useState} from 'react'
 import { Link } from "react-router-dom";
-
+  
 function Header() {
+  const [size, setSize] = useState(30);
+  useEffect(()=>(
+    (document.body.offsetWidth <400) ? setSize(40) : setSize(30)
+  ),[document.body.offsetWidth,setSize])
   return (
     <Flex gap="2" direction={"column"} className="p-3" align={"center"}>
       {/* main navbar */}
@@ -29,9 +34,10 @@ function Header() {
             gap="2"
             justify={"center"}
             align={"center"}
+            direction={{initial : 'column' ,md:"row"}}
             className="hover:text-[var(--red-10)] def-tr-clr"
           >
-            <FlaskConical size={30} className=" -rotate-12" strokeWidth={2.5} />
+            <FlaskConical size={size} className=" -rotate-12" strokeWidth={2.5} />
             <Text
               size={"8"}
               weight={"bold"}
@@ -48,14 +54,14 @@ function Header() {
             <Twitter
               className=" justify-self-end hover:text-[var(--red-10)] text-white def-tr-clr"
               strokeWidth={2.2}
-              size={28}
+              size={size-2}
             />
           </RLink>
           <RLink href="https://github.com/5b3a" target="_blank">
             <Github
               className=" justify-self-end hover:text-[var(--red-10)] text-white def-tr-clr"
               strokeWidth={2.2}
-              size={28}
+              size={size-2}
             />
           </RLink>
         </Box>
