@@ -107,7 +107,7 @@ const Footer = () => {
           made with{" "}
           <Heart size={size - 1} fill="var(--red-9)" stroke="none" /> by{" "}
           <RLink
-            href="#"
+            href="https://x.com/x_5b3a"
             className=" hover:no-underline text-[var(--red-10)] hover:text-[var(--gray-12)] def-tr-clr"
           >
             {" "}
