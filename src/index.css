@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.def-tr-clr{
+    @apply transition-colors duration-200 ease-linear
+}
+
+.inp-col{
+    input[color]{
+        @apply rounded-full
+    }
+}
