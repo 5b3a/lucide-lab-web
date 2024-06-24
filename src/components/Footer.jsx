@@ -73,7 +73,7 @@ const Footer = () => {
           >
             <FlaskRound size={size - 2} />
             <Text className=" tracking-wider" size={"4"}>
-              Lucide Lab GitHub
+              Official Lucide-lab GitHub
             </Text>
           </RLink>
         </Box>

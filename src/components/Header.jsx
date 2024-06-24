@@ -16,7 +16,7 @@ function Header() {
   const [size, setSize] = useState(30);
   useEffect(()=>(
     (document.body.offsetWidth <400) ? setSize(40) : setSize(30)
-  ),[document.body.offsetWidth,setSize])
+  ),[setSize])
   return (
     <Flex gap="2" direction={"column"} className="p-3" align={"center"}>
       {/* main navbar */}
@@ -57,7 +57,7 @@ function Header() {
               size={size-2}
             />
           </RLink>
-          <RLink href="https://github.com/5b3a" target="_blank">
+          <RLink href="https://github.com/5b3a/lucide-lab-web" target="_blank">
             <Github
               className=" justify-self-end hover:text-[var(--red-10)] text-white def-tr-clr"
               strokeWidth={2.2}
