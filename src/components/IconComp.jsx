@@ -94,7 +94,7 @@ function IconComp() {
           align={"center"}
           direction={{ initial: "column", md: "row" }}
         >
-          <Box className="bg-[var(--white-a1)] aspect-square p-4 rounded-md w-1/3 flex flex-wrap justify-center items-center">
+          <Box className="bg-[var(--white-a1)] w-full  aspect-square p-4 rounded-md sm:w-1/3 flex flex-wrap justify-center items-center">
             {/* icon */}
             <Icon
               ref={iconSvg}
