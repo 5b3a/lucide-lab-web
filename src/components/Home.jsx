@@ -17,7 +17,6 @@ import { nanoid } from "nanoid";
 import { Link } from "react-router-dom";
 
 import { useState, useMemo } from "react";
-
 function Home() {
   const allIcons = Object.keys(lucideLabs);
   const [iconArray, setIconArray] = useState(Object.keys(lucideLabs));
@@ -25,17 +24,23 @@ function Home() {
   const [size, setSize] = useState(36);
   const [color, setColor] = useState("currentColor");
   const [abswidth, setAbswidth] = useState(false);
-  const handleSearch = useMemo(
-    () => (e) => {
-      const newArr = iconArray.filter((item) => item.includes(e.target.value));
-      e.target.value.length > 0 ? setIconArray(newArr) : setIconArray(allIcons);
-    },
-    [iconArray, allIcons]
-  );
+
+  const handleSearch =(e) => {
+    const val = e.target.value
+    val
+      ? setIconArray(allIcons.filter((icon) => icon.includes(val)))
+      : setIconArray(allIcons);
+  };
   return (
     <Section className=" p-3 m-3 rounded-sm flex flex-col flex-wrap justify-center items-center gap-4">
       {/* upper section searchbox and icons */}
-      <Flex dir="row" gap={"3"}>
+      <Flex
+        dir={{ initial: "col", lg: "row" }}
+        wrap={"wrap"}
+        justify={"center"}
+        align={"center"}
+        gap={"3"}
+      >
         {/* search box */}
         <Box className="flex flex-row gap-2 bg-[var(--red-a2)] rounded-md">
           {/* input searchox */}
@@ -130,13 +135,17 @@ function Home() {
       <Separator orientation={"horizontal"} className="w-[90%]" />
 
       {/* main grid */}
-      <Grid columns={{ initial: "5", lg: "12" }} gap="4" className="mt-6">
+      <Grid
+        columns={{ initial: "3", sm: "5", md: "7", lg: "12" }}
+        gap="4"
+        className="mt-6"
+      >
         {iconArray.map((item) => {
           return (
             <Link
               to={`icons/${item}`}
               key={nanoid()}
-              className="flex items-center justify-center p-4 border border-[var(--red-)] bg-[var(--red-a2)] rounded-md flex-col gap-2 text-[var(--red-11)] hover:bg-[var(--red-a5)] def-tr-clr"
+              className="flex items-center justify-center p-4 border border-[var(--red-)] bg-[var(--red-a2)] rounded-md flex-col gap-2 text-[var(--red-11)] hover:bg-[var(--red-a5)] def-tr-clr aspect-square"
               title={item.toLowerCase()}
             >
               {
