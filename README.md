@@ -1,8 +1,7 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/ad83936d-639b-4cbf-9019-98484554dff7/deploy-status)](https://app.netlify.com/sites/lucide-lab/deploys)  
-https://lucide-lab.netlify.app/  
+![Vercel Deploy](https://deploy-badge.vercel.app/vercel/lucide-lab-web?style=for-the-badge)  
+https://lucide-lab-web.vercel.app/ 
 # Lucide-Labs-website
 ### To contribute
-
 
  - fork this repo
  - create a new branch [named: your-x-(feature/bug)]
