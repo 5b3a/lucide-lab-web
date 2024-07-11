@@ -83,7 +83,7 @@ const Footer = () => {
         <Box className="flex flex-wrap gap-6 py-2 justify-self-center hover:text-[var(--red-10)] justify-center items-center p-2 ">
           <RLink href="https://x.com/x_5b3a" target="_blank">
             <Twitter
-              className=" justify-self-end hover:text-[var(--red-10)] text-white def-tr-clr"
+              className=" justify-self-end icon-svg hover:size-[22px] transition-all duration-300 ease-linear text-white hover:stroke-[var(--red-9)] hover:fill-[var(--red-9)] "
               strokeWidth={2.2}
               size={size}
             />
@@ -91,7 +91,7 @@ const Footer = () => {
           <Separator orientation={"vertical"}/>
           <RLink href="https://github.com/5b3a" target="_blank">
             <Github
-              className=" justify-self-end hover:text-[var(--red-10)] text-white def-tr-clr"
+              className="stroke-white justify-self-end transition-all ease-linear hover:fill-[var(--red-9)]  hover:size-[22px] hover:stroke-[var(--red-9)]  "
               strokeWidth={2.2}
               size={size}
             />

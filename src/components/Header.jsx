@@ -52,14 +52,14 @@ function Header() {
         <Box className="flex flex-wrap gap-2 md:gap-6 py-2 md:py-0  justify-self-center hover:text-[var(--red-10)] ">
           <RLink href="https://x.com/x_5b3a" target="_blank">
             <Twitter
-              className=" justify-self-end hover:text-[var(--red-10)] text-white def-tr-clr"
+              className=" justify-self-end hover:stroke-[var(--red-9)] hover:fill-[var(--red-9)] text-white def-tr-clr"
               strokeWidth={2.2}
               size={size-2}
             />
           </RLink>
           <RLink href="https://github.com/5b3a/lucide-lab-web" target="_blank">
             <Github
-              className=" justify-self-end hover:text-[var(--red-10)] text-white def-tr-clr"
+              className=" justify-self-end hover:stroke-[var(--red-9)] hover:fill-[var(--red-9)] text-white def-tr-clr"
               strokeWidth={2.2}
               size={size-2}
             />
