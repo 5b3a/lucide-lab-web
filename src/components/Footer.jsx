@@ -105,7 +105,7 @@ const Footer = () => {
           className="font-mono uppercase justify-self-center flex gap-3 items-center cursor-default tracking-widest"
         >
           made with{" "}
-          <Heart size={size - 1} fill="var(--red-9)" stroke="none" /> by{" "}
+          <Heart className="hover:fill-none hover:stroke-[var(--red-9)] hover:size-[22px] transition-all ease-linear hover:stroke-2" size={size - 1} fill="var(--red-9)" stroke="none" /> by{" "}
           <RLink
             href="https://x.com/x_5b3a"
             className=" hover:no-underline text-[var(--red-10)] hover:text-[var(--gray-12)] def-tr-clr"

@@ -17,75 +17,71 @@ import { nanoid } from "nanoid";
 import { useParams } from "react-router-dom";
 import { useState, useRef } from "react";
 import * as Label from "@radix-ui/react-label";
+import instrucData from "../lib/instructionData.js";
+import { useCallback } from "react";
+import { toPng } from "html-to-image";
 
 function IconComp() {
   let { iconId } = useParams();
-
   iconId === undefined ? (window.location.href = "/icons/burger") : iconId;
 
-  const tableData = {
-    react: `import { ${iconId}} from '@lucide/lab';
-import { Icon } from 'lucide-react';
+  const iconSvg = useRef();
 
-function App() {
-  return (
-    <div>
-      <Icon iconNode={${iconId}} />
-    </div>
-  );
-}`,
-    vue: `<script setup>
-import { ${iconId} } from '@lucide/lab';
-import {  } from 'lucide-vue-next';
-</script>
-
-<template>
-  <div>
-    <Icon :iconNode="${iconId}" />
-  </div>
-</template>`,
-    "p-reaact": `
-    import { ${iconId} } from '@lucide/lab';
-import { Icon } from 'lucide-preact';
-
-function App() {
-  return (
-    <div>
-      <Icon iconNode={${iconId}} />
-    </div>
-  );
-}`,
-    svelte: `<script>
-import { Icon } from 'lucide-svelte';
-import { ${iconId} from '@lucide/lab';
-</script>
-
-<Icon iconNode={${iconId}} />
-`,
-    solid: `import { ${iconId} } from '@lucide/lab';
-import { Icon } from 'lucide-solid';
-
-function App() {
-  return (
-    <div>
-      <Icon iconNode={${iconId}} />
-    </div>
-  );
-}`,
-  };
-
+  const tableData = instrucData(iconId);
   const tableName = Object.keys(tableData);
   const tableContent = Object.values(tableData);
+
   const [strokeWidth, setStrokeWidth] = useState(2);
   const [size, setSize] = useState(150);
   const [strokeColor, setStrokeColor] = useState("currentColor");
   const [fillColor, setFillColor] = useState("none");
   const [abswidth, setAbswidth] = useState(false);
 
-  const iconSvg = useRef();
+  const handleSvgBtn = (e) => {
+    let timeOut;
+    if (timeOut) clearTimeout(timeOut);
+
+    window.navigator.clipboard.writeText(iconSvg.current.outerHTML);
+    const oT = e.target.innerText;
+    e.target.innerText = "copied";
+
+    timeOut = setTimeout(() => {
+      e.target.innerText = oT;
+    }, 2000);
+  };
+
+  const handleJSXBtn = (e) => {
+    let timeOut;
+    if (timeOut) clearTimeout(timeOut);
+
+    window.navigator.clipboard.writeText(
+      `<Icon iconNode={${iconId}} size={${size}} strokeWidth={${strokeWidth}} strokeColor={"${strokeColor}"} fill={"${fillColor}"} absoluteStrokeWidth={${abswidth}}  />`
+    );
+    const oT = e.target.innerText;
+    e.target.innerText = "copied";
+
+    timeOut = setTimeout(() => {
+      e.target.innerText = oT;
+    }, 2000);
+  };
+
+  const handleDownload = useCallback(() => {
+    toPng(iconSvg.current, { cacheBust: true })
+      .then((dataUrl) => {
+        const link = document.createElement("a");
+        link.download = `${iconId}-lucide-lab.png`;
+        link.href = dataUrl;
+        link.click();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [iconSvg, iconId]);
+
   return (
     <Section minHeight={"50svh"} className="py-0 px-4">
       <Flex gap={"4"} className="w-full p-4" direction={"column"}>
+        {/* title */}
         <Text
           size={"4"}
           className="bg-[var(--red-8)] p-2 mx-4 rounded-md flex flex-wrap justify-center items-center font-mono text-base md:text-4xl lg:font-semibold tracking-wider"
@@ -98,7 +94,8 @@ function App() {
           align={"center"}
           direction={{ initial: "column", md: "row" }}
         >
-          <Box className="bg-[var(--red-a2)] p-4 rounded-md w-2/3 flex flex-wrap justify-center items-center">
+          <Box className="bg-[var(--white-a1)] aspect-square p-4 rounded-md w-1/3 flex flex-wrap justify-center items-center">
+            {/* icon */}
             <Icon
               ref={iconSvg}
               size={size}
@@ -112,8 +109,8 @@ function App() {
           {/* //buttons */}
           <Flex
             gap={"4"}
-            direction={{ md: "column", sm: "row" }}
-            className="w-1/3"
+            direction={{ sm: "column" }}
+            className="w-2/3"
             justify={"center"}
             align={"center"}
           >
@@ -121,20 +118,7 @@ function App() {
               size={"4"}
               variant="soft"
               className="w-1/2 md:w-2/3  h-16"
-              onClick={(e) => {
-                let timeOut;
-                if (timeOut) clearTimeout(timeOut);
-
-                window.navigator.clipboard.writeText(
-                  `<Icon iconNode={${iconId}} size={${size}} strokeWidth={${strokeWidth}} strokeColor={"${strokeColor}"} fill={"${fillColor}"} absoluteStrokeWidth={${abswidth}}  />`
-                );
-                const oT = e.target.innerText;
-                e.target.innerText = "copied";
-
-                timeOut = setTimeout(() => {
-                  e.target.innerText = oT;
-                }, 2000);
-              }}
+              onClick={handleJSXBtn}
             >
               Copy JSX
             </Button>
@@ -142,20 +126,17 @@ function App() {
               variant="soft"
               className="w-1/2 md:w-2/3  h-16"
               size={"4"}
-              onClick={(e) => {
-                let timeOut;
-                if (timeOut) clearTimeout(timeOut);
-
-                window.navigator.clipboard.writeText(iconSvg.current.outerHTML);
-                const oT = e.target.innerText;
-                e.target.innerText = "copied";
-
-                timeOut = setTimeout(() => {
-                  e.target.innerText = oT;
-                }, 2000);
-              }}
+              onClick={handleSvgBtn}
             >
               Copy SVG
+            </Button>
+            <Button
+              variant="soft"
+              className="w-1/2 md:w-2/3  h-16"
+              size={"4"}
+              onClick={handleDownload}
+            >
+              Download SVG
             </Button>
           </Flex>
         </Flex>
@@ -240,11 +221,12 @@ function App() {
             }}
           />
         </Box>
-
       </Flex>
 
       <Section className="p-8">
-        <Text className=" font-sans" size={'6'}>Install <Code>lucide-lab</Code></Text>
+        <Text className=" font-sans" size={"6"}>
+          Install <Code>lucide-lab</Code>
+        </Text>
         <Tabs.Root defaultValue="pnpm">
           <Tabs.List>
             <Tabs.Trigger value="pnpm"> pnpm </Tabs.Trigger>
@@ -254,19 +236,19 @@ function App() {
 
           <Tabs.Content value="pnpm">
             <Box className="w-full mt-3 flex items-center min-h-12 border border-[var(--red-a4)] p-4 bg-[var(--red-a2)] font-mono">
-            <Text size={'3'}>pnpm install @lucide/lab</Text>
+              <Text size={"3"}>pnpm install @lucide/lab</Text>
             </Box>
           </Tabs.Content>
 
           <Tabs.Content value="npm">
             <Box className="w-full mt-3 flex items-center min-h-12 border border-[var(--red-a4)] p-4 bg-[var(--red-a2)] font-mono">
-            <Text size={'3'}>npm install @lucide/lab</Text>
+              <Text size={"3"}>npm install @lucide/lab</Text>
             </Box>
           </Tabs.Content>
 
           <Tabs.Content value="yarn">
             <Box className="w-full mt-3 flex items-center min-h-12 border border-[var(--red-a4)] p-4 bg-[var(--red-a2)] font-mono">
-            <Text size={'3'} >yarn add @lucide/lab</Text>
+              <Text size={"3"}>yarn add @lucide/lab</Text>
             </Box>
           </Tabs.Content>
         </Tabs.Root>

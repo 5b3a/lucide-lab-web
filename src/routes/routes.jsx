@@ -1,15 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
-
-import Home from './Home'
-import Layout from "./Layout";
-import IconComp from "./IconComp";
-import ErrorPage from "./Error";
+import {Home,Layout,Error,IconPage,} from '../components'
 
 const routes = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    errorElement : <ErrorPage/>,
+    errorElement : <Error/>,
     children : [
         {
         path: '',
@@ -17,11 +13,11 @@ const routes = createBrowserRouter([
     },
     {
       path : '/icons',
-      element : <IconComp/>
+      element : <IconPage/>
   },
     {
         path : '/icons/:iconId',
-        element : <IconComp/>
+        element : <IconPage/>
     },
 ]
   },
