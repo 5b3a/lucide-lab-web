@@ -111,7 +111,7 @@ const Footer = () => {
             className=" hover:no-underline text-[var(--red-10)] hover:text-[var(--gray-12)] def-tr-clr"
           >
             {" "}
-            5b3a
+            atybdot
           </RLink>
         </Text>
       </Grid>
